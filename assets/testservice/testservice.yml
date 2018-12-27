@@ -1,0 +1,4 @@
+test:
+  name: "this is test service default"
+  property: "property from config server"
+  hi: "hello config server"

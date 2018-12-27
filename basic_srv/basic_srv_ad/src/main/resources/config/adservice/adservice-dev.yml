@@ -1,0 +1,10 @@
+test:
+  name: "ad_service_dev_only_456"
+  property: "property from config server dev"
+  hi: "hello config server dev"
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://opadmin:opadmin_2016@dds-2zecda7e082ebb241641-pub.mongodb.rds.aliyuncs.com:3717,dds-2zecda7e082ebb242806-pub.mongodb.rds.aliyuncs.com:3717/zlydata?replicaSet=mgset-2628167
+debug: true

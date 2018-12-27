@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://rm-2zeqj4887s6r0v7jh608.mysql.rds.aliyuncs.com:3306/zlycare?useUnicode=true&characterEncoding=UTF-8
+    username: trx_admin
+    password: Trxadmin@2018
+  data:
+    mongodb:
+      # uri: mongodb://opadmin:opadmin_2016@10.162.201.58:3717/zlydata
+      uri: mongodb://opadmin:opadmin_2016@dds-2zecda7e082ebb241641-pub.mongodb.rds.aliyuncs.com:3717,dds-2zecda7e082ebb242806-pub.mongodb.rds.aliyuncs.com:3717/zlydata?replicaSet=mgset-2628167
+  redis:
+    host: r-2ze8b3c5848481b4600.redis.rds.aliyuncs.com
+    password: BVHY#RpFYJ%gZpeV@2018
+    database: 2
+debug: false

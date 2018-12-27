@@ -1,0 +1,10 @@
+test:
+  name: "this is ad service prod"
+  property: "property from config server prod"
+  hi: "hello config server prod"
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://opadmin:MLN8v22BXG9YOCq7@dds-2ze6653f230978642.mongodb.rds.aliyuncs.com:3717,dds-2ze6653f230978641.mongodb.rds.aliyuncs.com:3717/zlydata?replicaSet=mgset-2813849
+debug: true

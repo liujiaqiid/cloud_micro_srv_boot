@@ -1,0 +1,4 @@
+test:
+  name: "this is boss service dev"
+  property: "property from config server dev"
+  hi: "hello config server dev"

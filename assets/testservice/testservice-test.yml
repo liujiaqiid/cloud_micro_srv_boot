@@ -1,0 +1,4 @@
+test:
+  name: "test_service test env"
+  property: "property from config server test"
+  hi: "hello config server test"

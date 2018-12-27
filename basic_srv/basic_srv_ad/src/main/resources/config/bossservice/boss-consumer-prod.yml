@@ -1,0 +1,14 @@
+## 线上的mongo配置方式使用副本集
+spring:
+  datasource:
+    url: jdbc:mysql://rm-2ze45ormt78c648a8.mysql.rds.aliyuncs.com:3306/zlycare?useUnicode=true&characterEncoding=UTF-8
+    username: juliye
+    password: juliye@2014
+  data:
+    mongodb:
+      uri: mongodb://opadmin:MLN8v22BXG9YOCq7@dds-2ze6653f230978642.mongodb.rds.aliyuncs.com:3717,dds-2ze6653f230978641.mongodb.rds.aliyuncs.com:3717/zlydata?replicaSet=mgset-2813849
+  redis:
+    host: r-2ze8b3c5848481b4600.redis.rds.aliyuncs.com
+    password: BVHY#RpFYJ%gZpeV@2018
+    database: 4
+debug: false
