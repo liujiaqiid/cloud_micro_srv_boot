@@ -64,6 +64,7 @@
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
+		    <dockerDirectory>bin</dockerDirectory>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                         <LOG_DIR>/data/logs/${project.artifactId}</LOG_DIR>
