@@ -10,5 +10,3 @@ EXPOSE 18888
 RUN java -version
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
-
