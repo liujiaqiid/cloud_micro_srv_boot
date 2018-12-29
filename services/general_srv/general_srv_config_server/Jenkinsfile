@@ -1,21 +1,24 @@
-pipeline{
+pipeline {
     agent any
     stages {
-        stage('Init:GitPull') {
+        stage('Init') {
             steps {
+                echo 'Git Pull...'
                 retry(3) {
-                    sh 'git pull'
+                    sh 'git pull origin master'
                 }
             }
         }
         stage('Build') {
             steps {
-                # sh 'mvn -B -DskipTests clean package'
+                echo 'MVN Build...'
+                sh 'cd services/general_srv/general_srv_config_server'
                 sh 'mvn clean package -DskipTests dockerfile:build'
             }
         }
         stage('Test') {
             steps {
+                echo 'Test...'
                 sh 'mvn test'
             }
             post {
@@ -24,9 +27,10 @@ pipeline{
                 }
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
-                sh './script/deploy.sh'
+                echo 'Deploy...'
+                sh './bin/deploy_docker_image.sh'
             }
         }
     }
