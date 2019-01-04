@@ -12,7 +12,7 @@
 
     <groupId>org.lulucky.ms.configserver</groupId>
     <artifactId>general_srv_config_server</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <name>general_srv_config_server</name>
     <description>通用服务－配置中心</description>
     <packaging>jar</packaging>
@@ -64,7 +64,7 @@
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
-		    <dockerDirectory>bin</dockerDirectory>
+		            <!--<dockerDirectory>bin</dockerDirectory>-->
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                         <LOG_DIR>/data/logs/${project.artifactId}</LOG_DIR>
