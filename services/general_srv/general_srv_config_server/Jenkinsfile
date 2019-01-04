@@ -14,6 +14,8 @@ pipeline {
                 echo 'MVN Build...'
                 // sh 'usermod -aG docker jenkins'
                 dir ('services/general_srv/general_srv_config_server') {
+                    sh 'export M2_HOME=/opt/ops/tools/apache-maven-3.6.0'
+                    sh 'export PATH=$PATH:$M2_HOME/bin'
                     sh 'mvn clean package -DskipTests dockerfile:build'
                 }
 
