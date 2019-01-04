@@ -12,7 +12,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'MVN Build...'
-                sh 'cd services/general_srv/general_srv_config_server & mvn clean package -DskipTests dockerfile:build'
+                dir ('services/general_srv/general_srv_config_server') {
+                    sh 'mvn clean package -DskipTests dockerfile:build'
+                }
+
             }
         }
         /*stage('Test') {
