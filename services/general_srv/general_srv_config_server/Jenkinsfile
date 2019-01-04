@@ -16,7 +16,7 @@ pipeline {
                 sh 'mvn clean package -DskipTests dockerfile:build'
             }
         }
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 echo 'Test...'
                 sh 'mvn test'
@@ -26,11 +26,11 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                 }
             }
-        }
+        }*/
         stage('Deploy') {
             steps {
                 echo 'Deploy...'
-                sh './bin/deploy_docker_image.sh'
+                sh './helpers/deploy_docker_image.sh'
             }
         }
     }
@@ -43,9 +43,9 @@ pipeline {
         }
         failure {
             echo 'This will run only if failed'
-            //mail to: 'liujiaqi@zlycare.com',
-            //     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-            //    body: "Something is wrong with ${env.BUILD_URL}"
+            /*mail to: 'liujiaqi@zlycare.com',
+                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                body: "Something is wrong with ${env.BUILD_URL}"*/
         }
         unstable {
             echo 'This will run only if the run was marked as unstable'
