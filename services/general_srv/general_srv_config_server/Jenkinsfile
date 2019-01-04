@@ -12,6 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'MVN Build...'
+                sh 'usermod -aG docker jenkins'
                 dir ('services/general_srv/general_srv_config_server') {
                     sh 'mvn clean package -DskipTests dockerfile:build'
                 }
