@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'M3Local'
+    }
     stages {
         stage('Init') {
             steps {
@@ -10,13 +13,10 @@ pipeline {
             }
         }
         stage('Build') {
-            def mvn_version = 'M3Local'
-            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-                steps {
-                    echo 'MVN Build...'
-                    dir('services/general_srv/general_srv_config_server') {
-                        sh 'mvn clean package -DskipTests dockerfile:build'
-                    }
+            steps {
+                echo 'MVN Build...'
+                dir('services/general_srv/general_srv_config_server') {
+                    sh 'mvn clean package -DskipTests dockerfile:build'
                 }
             }
         }
