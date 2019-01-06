@@ -12,14 +12,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'MVN Build...'
-                // sh 'usermod -aG docker jenkins'
-                dir ('services/general_srv/general_srv_config_server') {
-                    sh 'export PATH=$PATH:/opt/ops/tools/apache-maven-3.6.0/bin'
-                    sh 'echo $PATH'
-                    sh 'id'
-                    sh 'mvn clean package -DskipTests dockerfile:build'
+                def mvn_version = 'M3Local'
+                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+                    dir ('services/general_srv/general_srv_config_server') {
+                        sh 'mvn clean package -DskipTests dockerfile:build'
+                    }
                 }
-
             }
         }
         /*stage('Test') {
