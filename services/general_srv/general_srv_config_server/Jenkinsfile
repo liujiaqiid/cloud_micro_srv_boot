@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploy...'
-                sh './helpers/deploy_docker_image.sh localhost test general_srv_config_server 18888 1.0.1 liuhongye2018 A1987719'
+                sh 'sh ./helpers/deploy_docker_image.sh localhost test general_srv_config_server 18888 1.0.2 liuhongye2018 A1987719'
             }
         }
     }
