@@ -53,7 +53,12 @@ function step_1_push_image {
     docker push registry.cn-beijing.aliyuncs.com/lulucky/$projname:$tag
     echo "-------------------1.3 after push"
     # Remove local images which tag is none
-    docker images |grep none |awk '{print $3}'|xargs docker rmi -f
+    docker images |grep none
+    if [ $? -eq 0 ];then
+      docker images |grep none |awk '{print $3}'|xargs docker rmi -f
+    else
+      echo "no none images"
+    fi
     echo "-------------------1.4 after rmi"
 }
 
@@ -61,7 +66,12 @@ function step_1_push_image {
 function step_2_stop_container {
     # Stop and Remove Container
     # ansible $hostname -u lulucky --sudo -m shell -a "docker ps -a|grep $projname|awk '{print \$1}'|xargs docker rm -f"
-    docker ps -a|grep $projname|awk '{print $1}'|xargs docker rm -f
+    docker ps -a|grep $projname
+    if [ $? -eq 0 ];then
+        docker ps -a|grep $projname|awk '{print $1}'|xargs docker rm -f
+    else
+        echo "no container running"
+    fi
     echo "-------------------2.1 after rm container"
     # Pull the new image
     # ansible $hostname -u lulucky --sudo -m shell -a "docker pull registry-vpc.cn-beijing.aliyuncs.com/micro-srv:$projname:$tag"
@@ -73,7 +83,12 @@ function step_2_stop_container {
 function step_3_start_container {
     # Stop and Remove Docker Image
     # ansible $hostname -u lulucky --sudo -m shell -a "docker images |grep none |awk '{print \$3}'|xargs docker rmi -f"
-    docker images |grep none |awk '{print $3}'|xargs docker rmi -f
+    docker images |grep none
+    if [ $? -eq 0 ];then
+        docker images |grep none |awk '{print $3}'|xargs docker rmi -f
+    else
+        echo "no none images"
+    fi
     echo "-------------------3.1 after rm image"
     # Make sure the log directory exists 
     # ansible $hostname -u lulucky --sudo -m file -a "path=/data/logs/$projname state=directory "
@@ -81,13 +96,12 @@ function step_3_start_container {
     echo "-------------------3.2 after dir"
     # Run docker image
     # ansible $hostname -u lulucky --sudo -m shell -a "docker run -d -p $port1:$port1  -v /etc/hosts:/etc/hosts  -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /data/logs/$projname:/data/logs/$projname -e "SPRING_PROFILES_ACTIVE=$env"  --name $projname registry-vpc.cn-beijing.aliyuncs.com/micro-srv/$projname:$tag "
-    docker run -d -p $port1:$port1 \
-        -v /etc/localtime:/etc/localtime \
-        -v /data/logs/$projname:/data/logs/$projname
-        -e "SPRING_PROFILES_ACTIVE=$env" \
-        --restart always \
+    docker run -d -p $port1:$port1\
+        -v /etc/localtime:/etc/localtime\
+        -v /data/logs/$projname:/data/logs/$projname\
+        -e "SPRING_PROFILES_ACTIVE=$env"\
+        --restart always\
         --name $projname registry.cn-beijing.aliyuncs.com/lulucky/$projname:$tag
-        # -t
     echo "-------------------3.3 after docker run"
 }
 
