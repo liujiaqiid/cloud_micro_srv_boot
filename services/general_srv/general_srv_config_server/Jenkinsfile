@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'MVN Build...'
-                dir('services/general_srv/general_srv_eureka') {
+                dir('services/general_srv/general_srv_config_server') {
                     sh 'mvn clean package -DskipTests dockerfile:build'
                 }
             }
