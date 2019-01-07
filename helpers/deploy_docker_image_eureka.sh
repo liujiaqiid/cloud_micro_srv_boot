@@ -36,9 +36,9 @@ hostname='localhost'
 # 构建环境
 env='test'
 # 构建项目
-projname='general_srv_config_server'
+projname='general_srv_eureka'
 # 暴露端口号
-port=18888
+port=18761
 # 镜像标签
 tag=$1
 #
