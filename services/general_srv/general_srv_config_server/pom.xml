@@ -12,7 +12,7 @@
 
     <groupId>org.lulucky.ms.configserver</groupId>
     <artifactId>general_srv_config_server</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>general_srv_config_server</name>
     <description>通用服务－配置中心</description>
     <packaging>jar</packaging>
