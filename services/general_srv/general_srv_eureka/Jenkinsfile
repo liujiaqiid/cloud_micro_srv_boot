@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'MVN Build...'
-                dir('services/general_srv/general_srv_eureka') {
+                dir('services/general_srv/general_srv_config_server') {
                     sh 'mvn clean package -DskipTests dockerfile:build'
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploy...'
-                sh 'sh ./helpers/deploy_docker_image_config.sh 1.0.3'
+                sh 'sh ./helpers/deploy_docker_image.sh localhost test general_srv_config_server 18888 1.0.2 liuhongye2018 A1987719'
             }
         }
     }

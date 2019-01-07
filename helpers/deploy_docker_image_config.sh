@@ -31,20 +31,26 @@ done
 
 ###################
 
-hostname=$1
-env=$2
-projname=$3
-port1=$4
-tag=$5
-uname=$6
-pwd=$7
+# 目标主机
+hostname='localhost'
+# 构建环境
+env='test'
+# 构建项目
+projname='general_srv_config_server'
+# 暴露端口号
+port1=18888
+# 镜像标签
+tag=$1
+#
+#uname=$6
+#pwd=$7
 
 
 
 # Push local docker image to remote repo
 function step_1_push_image {
-    docker login --username=$uname --password=$pwd registry.cn-beijing.aliyuncs.com
-    echo "-------------------1.1 after login"
+    # docker login --username=$uname --password=$pwd registry.cn-beijing.aliyuncs.com
+    # echo "-------------------1.1 after login"
     # Docker tag image
     docker tag lulucky/$projname:$tag registry.cn-beijing.aliyuncs.com/lulucky/$projname:$tag
     echo "-------------------1.2 after tag"
@@ -84,7 +90,8 @@ function step_3_start_container {
     # Stop and Remove Docker Image
     # ansible $hostname -u lulucky --sudo -m shell -a "docker images |grep none |awk '{print \$3}'|xargs docker rmi -f"
     docker images |grep none
-    if [ $? -eq 0 ];then
+    if [ $? -eq 0 ];
+    then
         docker images |grep none |awk '{print $3}'|xargs docker rmi -f
     else
         echo "no none images"
@@ -92,8 +99,11 @@ function step_3_start_container {
     echo "-------------------3.1 after rm image"
     # Make sure the log directory exists 
     # ansible $hostname -u lulucky --sudo -m file -a "path=/data/logs/$projname state=directory "
-    mkdir -p /data/logs/$projname
-    echo "-------------------3.2 after dir"
+    if [ ! -d  "/data/logs/$projname" ];
+    then
+        mkdir -p /data/logs/$projname
+    fi
+    echo "-------------------3.2 after mk dir"
     # Run docker image
     # ansible $hostname -u lulucky --sudo -m shell -a "docker run -d -p $port1:$port1  -v /etc/hosts:/etc/hosts  -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /data/logs/$projname:/data/logs/$projname -e "SPRING_PROFILES_ACTIVE=$env"  --name $projname registry-vpc.cn-beijing.aliyuncs.com/micro-srv/$projname:$tag "
     docker run -d -p $port1:$port1\

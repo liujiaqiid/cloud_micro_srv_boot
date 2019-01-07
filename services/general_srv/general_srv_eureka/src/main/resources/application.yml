@@ -1,0 +1,26 @@
+server:
+  port: 18761
+
+eureka:
+  client:
+    register-with-eureka: false # 关闭自注册，Eureka不使用Eureka服务进行注册
+    fetch-registry: false # 不在本地缓存注册表信息
+  server:
+    # 清除无效节点间隔，默认为60s
+    eviction-interval-timer-in-ms: 60000
+    # 在服务器接收请求之前等待的时间
+    wait-time-in-ms-when-sync-empty: 300000
+    ## 禁用自我保护机制，快速失败、快速注销
+    enable-self-preservation: false
+
+# logging:
+#  level:
+#    com:
+#      netflix:
+#        eureka: OFF
+#        discovery: OFF
+logging:
+  path: /data/logs/general_srv_eureka
+  file: /data/logs/general_srv_eureka/general_srv_eureka.log
+  level:
+     root: info

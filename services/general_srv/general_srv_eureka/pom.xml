@@ -10,25 +10,24 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.lulucky.ms.configserver</groupId>
-    <artifactId>general_srv_config_server</artifactId>
-    <version>1.0.3</version>
-    <name>general_srv_config_server</name>
-    <description>通用服务－配置中心</description>
-    <packaging>jar</packaging>
+    <groupId>org.lulucky.ms.eureka</groupId>
+    <artifactId>general_srv_eureka</artifactId>
+    <version>1.0.0</version>
+    <name>general_srv_eureka</name>
+    <description>This is register center based on eureka.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <docker.image.prefix>lulucky</docker.image.prefix>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
         <dependency>
@@ -65,7 +64,7 @@
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
-		            <!--<dockerDirectory>bin</dockerDirectory>-->
+                    <!--<dockerDirectory>bin</dockerDirectory>-->
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                         <LOG_DIR>/data/logs/${project.artifactId}</LOG_DIR>
